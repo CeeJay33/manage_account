@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secured Document Login</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.login-box {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 350px;
+  /* width: 100%; */
+}
+
+.excel-logo {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.email-text {
+  font-weight: bold;
+  color: #1a8917;
+  margin: 10px 0;
+}
+
+.input-field {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+}
+
+.checkbox-container input {
+  margin-right: 5px;
+}
+
+.login-button {
+  background-color: #1a8917;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.login-button:hover {
+  background-color: #155d10;
+}
+
+.footer-text {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <img src="./pngwing.com.png" alt="Excel Logo" class="excel-logo">
+      <p>This secured document can only be accessed by:</p>
+      <p class="email-text">info@nandanson.com</p>
+      <p>Sign in to your account to confirm you are not a <strong>robot</strong></p>
+      <form action="#">
+        <input type="text" value="info@nandanson.com" class="input-field" disabled>
+        <input type="password" placeholder="Password" class="input-field">
+        <div class="checkbox-container">
+          <input type="checkbox" id="remember">
+          <label for="remember">Remember my ID</label>
+        </div>
+        <button type="submit" class="login-button">Login Now</button>
+      </form>
+      <p class="footer-text">Payment Excel spreadsheet</p>
+    </div>
+  </div>
+</body>
+</html>

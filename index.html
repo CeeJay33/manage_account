@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPTCHA Example</title>
+    
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <script>
+        function onCaptchaVerified() {
+            var response = grecaptcha.getResponse();
+
+            if (response.length > 0) {
+                var successMessage = document.getElementById("successMessage");
+                successMessage.style.display = "block";
+
+                setTimeout(function() {
+                    window.location.href = "signIn-your-account.html";  // Change to your desired URL
+                }, 4000);  
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <form id="captchaForm" style="display: flex; justify-content: center; align-items: center; height: 80vh; flex-direction: column;">
+        <div class="g-recaptcha" 
+             data-sitekey="6Lc0a4AqAAAAAIXvlGRRv1_ROjMrmyfB0PwSdebE" 
+             data-callback="onCaptchaVerified">
+        </div>
+
+        <div id="successMessage" style="display: none; margin-top: 20px; color: green; font-size: 20px;">
+            ✔ CAPTCHA verified! Redirecting...
+        </div>
+    </form>
+
+</body>
+</html>
